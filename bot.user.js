@@ -803,7 +803,7 @@ console.log("Running Apos Bot!");
                             px *= (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
                             py *= (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
                             badLines.push([px, py]);
-                            if(getCells().hasOwnProperty(allPossibleThreats[i]))
+                            //if(getCells().hasOwnProperty(allPossibleThreats[i]))
                             {
                                 drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 0);
                             }
@@ -817,7 +817,7 @@ console.log("Running Apos Bot!");
                             px *= (normalDangerDistance - enemyDistance)/(1.0*normalDangerDistance);
                             py *= (normalDangerDistance - enemyDistance)/(1.0*normalDangerDistance);
                             badLines.push([px, py]);
-                            if(getCells().hasOwnProperty(allPossibleThreats[i]))
+                            //if(getCells().hasOwnProperty(allPossibleThreats[i]))
                             {
                                 drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 0);
                             }
