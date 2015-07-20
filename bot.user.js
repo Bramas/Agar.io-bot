@@ -937,7 +937,7 @@ console.log("Running Apos Bot!");
                     }
                     if(1)
                     {
-                        var destination = followAngle(0, blob.x, blob.y, 190 + blob.size);
+                        var destination = followAngle(0, player[k].x, player[k].y, 190 + player[k].size);
                         destinationChoices.push(destination);
                     }
                     else
