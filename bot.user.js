@@ -801,7 +801,7 @@ console.log("Running Apos Bot!");
                             px /= enemyDistance;
                             py /= enemyDistance;
                             var factor = (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
-                            factor *= factor*200;
+                            factor *= factor*500;
                             px *= factor;
                             py *= factor;
                             badLines.push([px, py]);
@@ -818,7 +818,7 @@ console.log("Running Apos Bot!");
                             px /= enemyDistance;
                             py /= enemyDistance;
                             var factor = (normalDangerDistance - enemyDistance)/(1.0*normalDangerDistance);
-                            factor *= factor*200;
+                            factor *= factor*500;
                             px *= factor;
                             py *= factor;
                             badLines.push([px, py]);
@@ -940,7 +940,7 @@ console.log("Running Apos Bot!");
                         var diff = (angle2 - angle1).mod(360);
                         obstacleAngles.push([angle1, diff]);
                     }
-
+/*
                     for (var i = 0; i < goodAngles.length; i++) {
                         var line1 = followAngle(goodAngles[i][0], player[k].x, player[k].y, 100 + player[k].size);
                         var line2 = followAngle((goodAngles[i][0] + goodAngles[i][1]).mod(360), player[k].x, player[k].y, 100 + player[k].size);
@@ -953,7 +953,7 @@ console.log("Running Apos Bot!");
 
                         drawPoint(line1[0], line1[1], 0, "" + i + ": 0");
                         drawPoint(line2[0], line2[1], 0, "" + i + ": 1");
-                    }
+                    }*/
 
                     for (var i = 0; i < obstacleAngles.length; i++) {
                         var line1 = followAngle(obstacleAngles[i][0], player[k].x, player[k].y, 50 + player[k].size);
@@ -1018,7 +1018,7 @@ console.log("Running Apos Bot!");
                             offset[0] += badLines[i][0];
                             offset[1] += badLines[i][1];
                         }
-                        destinationChoices.push([tempMoveX + offset[0], tempMoveY + offset[1]]);
+                        destinationChoices.push([tempMoveX + offset[0]*10, tempMoveY + offset[1]*10]);
                     } else if (clusterAllFood.length > 0) {
                         for (var i = 0; i < clusterAllFood.length; i++) {
                             //console.log("mefore: " + clusterAllFood[i][2]);
