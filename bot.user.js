@@ -796,8 +796,8 @@ console.log("Running Apos Bot!");
                         if ((enemyCanSplit && enemyDistance < splitDangerDistance)) {
 
                             badAngles.push(getAngleRange(player[k], allPossibleThreats[i], i, splitDangerDistance));
-                            var px = allPossibleThreats[i][0] - player[k][0];
-                            var py = allPossibleThreats[i][1] - player[k][1];
+                            var px = allPossibleThreats[i].x - player[k].x;
+                            var py = allPossibleThreats[i].y - player[k].y;
                             px /= enemyDistance;
                             py /= enemyDistance;
                             px *= (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
