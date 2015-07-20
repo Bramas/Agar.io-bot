@@ -27,7 +27,7 @@ Array.prototype.peek = function() {
 var sha = "efde0488cc2cc176db48dd23b28a20b90314352b";
 function getLatestCommit() {
     window.jQuery.ajax({
-            url: "https://api.github.com/repos/apostolique/Agar.io-bot/git/refs/heads/master",
+            url: "https://api.github.com/repos/bramas/Agar.io-bot/git/refs/heads/master",
             cache: false,
             dataType: "jsonp"
         }).done(function(data) {
@@ -47,7 +47,7 @@ function getLatestCommit() {
                 window.jQuery("#" + prefix + "Dialog").show();
             }
 
-            $.get('https://raw.githubusercontent.com/Apostolique/Agar.io-bot/master/bot.user.js?' + Math.floor((Math.random() * 1000000) + 1), function(data) {
+            $.get('https://raw.githubusercontent.com/Bramas/Agar.io-bot/master/bot.user.js?' + Math.floor((Math.random() * 1000000) + 1), function(data) {
                 var latestVersion = data.replace(/(\r\n|\n|\r)/gm,"");
                 latestVersion = latestVersion.substring(latestVersion.indexOf("// @version")+11,latestVersion.indexOf("// @grant"));
 
@@ -56,7 +56,7 @@ function getLatestCommit() {
                 
                 if(latestVersion > myVersion)
                 {
-                    update("aposBot", "bot.user.js", "https://github.com/Apostolique/Agar.io-bot/blob/" + sha + "/bot.user.js/");
+                    update("aposBot", "bot.user.js", "https://github.com/Bramas/Agar.io-bot/blob/" + sha + "/bot.user.js/");
                 }
                 console.log('Current bot.user.js Version: ' + myVersion + " on Github: " + latestVersion);
             });
@@ -131,6 +131,7 @@ console.log("Running Apos Bot!");
     }
 
     function compareSize(player1, player2, ratio) {
+        console.log("compareSize "+player1.size+" "+player2.size);
         if (player1.size * player1.size * ratio < player2.size * player2.size) {
             return true;
         }
