@@ -755,7 +755,7 @@ console.log("Running Apos Bot!");
                         
                         var splitDangerDistance = allPossibleThreats[i].size + splitDistance + 10 + shiftDistance;
 
-                        var normalDangerDistance = allPossibleThreats[i].size + 20 + shiftDistance;
+                        var normalDangerDistance = allPossibleThreats[i].size + 40 + shiftDistance;
 
 
                         //console.log("Found distance.");
