@@ -805,8 +805,9 @@ console.log("Running Apos Bot!");
                             badLines.push([px, py]);
                             //if(getCells().hasOwnProperty(allPossibleThreats[i]))
                             {
-                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 0);
+                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 3);
                             }
+                            console.log(" "+px+" "+py);
                         } else if ((!enemyCanSplit && enemyDistance < normalDangerDistance)) {
 
                             badAngles.push(getAngleRange(player[k], allPossibleThreats[i], i, normalDangerDistance));
@@ -819,7 +820,7 @@ console.log("Running Apos Bot!");
                             badLines.push([px, py]);
                             //if(getCells().hasOwnProperty(allPossibleThreats[i]))
                             {
-                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 0);
+                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 3);
                             }
                         }
                         /*else if (enemyCanSplit && enemyDistance < splitDangerDistance + shiftDistance) {
