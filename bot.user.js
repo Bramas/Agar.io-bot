@@ -800,8 +800,10 @@ console.log("Running Apos Bot!");
                             var py = allPossibleThreats[i].y - player[k].y;
                             px /= enemyDistance;
                             py /= enemyDistance;
-                            px *= (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
-                            py *= (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
+                            var f = (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
+                            f *= f*100;
+                            px *= f;
+                            py *= f;
                             badLines.push([px, py]);
                             //if(getCells().hasOwnProperty(allPossibleThreats[i]))
                             {
@@ -815,8 +817,10 @@ console.log("Running Apos Bot!");
                             var py = allPossibleThreats[i][1] - player[k][1];
                             px /= enemyDistance;
                             py /= enemyDistance;
-                            px *= (normalDangerDistance - enemyDistance)/(1.0*normalDangerDistance);
-                            py *= (normalDangerDistance - enemyDistance)/(1.0*normalDangerDistance);
+                            var f = (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
+                            f *= f*100;
+                            px *= f;
+                            py *= f;
                             badLines.push([px, py]);
                             //if(getCells().hasOwnProperty(allPossibleThreats[i]))
                             {
