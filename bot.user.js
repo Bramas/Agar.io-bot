@@ -232,7 +232,7 @@ console.log("Running Apos Bot!");
                 if (isFood(blob, listToUse[element])) {
                     //IT'S FOOD!
                     foodElementList.push(listToUse[element]);
-
+                    
                     if (isSplitTarget(blob, listToUse[element])) {
                         drawCircle(listToUse[element].x, listToUse[element].y, listToUse[element].size + 50, 7);
                         splitTargetList.push(listToUse[element])
@@ -987,8 +987,8 @@ console.log("Running Apos Bot!");
                         var offset = [0, 0];
                         for(var i = 0; i < badAngles.length; i++)
                         {
-                            offset[0] += math.cos(badAngles[i])* badAnglesStrength[i]*badAnglesStrength[i]*10;
-                            offset[1] += math.sin(badAngles[i])* badAnglesStrength[i]*badAnglesStrength[i]*10;
+                            offset[0] += Math.cos(badAngles[i])* badAnglesStrength[i]*badAnglesStrength[i]*10;
+                            offset[1] += Math.sin(badAngles[i])* badAnglesStrength[i]*badAnglesStrength[i]*10;
                         }
                         destinationChoices.push([tempMoveX + offset[0], tempMoveY + offset[1]]);
                     } else if (clusterAllFood.length > 0) {
