@@ -140,6 +140,9 @@ console.log("Running Apos Bot!");
     function canSplit(player1, player2) {
         return compareSize(player1, player2, 2.30) && !compareSize(player1, player2, 9);
     }
+    //function isTooBig(player1, player2) {
+    //    return compareSize(player1, player2, 2.30) && !compareSize(player1, player2, 9);
+    //}
 
     function isItMe(player, cell2) {
         if (getMode() == ":teams") {
@@ -749,14 +752,15 @@ console.log("Running Apos Bot!");
 
                         var shiftDistance = player[k].size;
                         
-                        var splitDangerDistance = allPossibleThreats[i].size + splitDistance + 50 + shiftDistance;
+                        var splitDangerDistance = allPossibleThreats[i].size + splitDistance + 10 + shiftDistance;
 
-                        var normalDangerDistance = allPossibleThreats[i].size + 50 + shiftDistance;
+                        var normalDangerDistance = allPossibleThreats[i].size + 10 + shiftDistance;
 
 
                         //console.log("Found distance.");
 
-                        var enemyCanSplit = canSplit(player[k], allPossibleThreats[i]);
+                        // Big enemis will not split for us!!
+                        var enemyCanSplit = canSplit(player[k], allPossibleThreats[i]) && isFood(allPossibleThreats[i], player[k]);
                         
                         for (var j = clusterAllFood.length - 1; j >= 0 ; j--) {
                             var secureDistance = (enemyCanSplit ? splitDangerDistance : normalDangerDistance);
