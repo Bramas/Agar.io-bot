@@ -747,11 +747,12 @@ console.log("Running Apos Bot!");
 
                         var enemyDistance = computeDistance(allPossibleThreats[i].x, allPossibleThreats[i].y, player[k].x, player[k].y);
 
-                        var splitDangerDistance = allPossibleThreats[i].size + splitDistance + 80;
-
-                        var normalDangerDistance = allPossibleThreats[i].size + 30;
-
                         var shiftDistance = player[k].size;
+                        
+                        var splitDangerDistance = allPossibleThreats[i].size + splitDistance + 50 + shiftDistance;
+
+                        var normalDangerDistance = allPossibleThreats[i].size + 50 + shiftDistance;
+
 
                         //console.log("Found distance.");
 
@@ -767,10 +768,10 @@ console.log("Running Apos Bot!");
 
                         if (enemyCanSplit) {
                             drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, splitDangerDistance, 0);
-                            drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, splitDangerDistance + shiftDistance, 6);
+                            //drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, splitDangerDistance + shiftDistance, 6);
                         } else {
                             drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, normalDangerDistance, 3);
-                            drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, normalDangerDistance + shiftDistance, 6);
+                            //drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, normalDangerDistance + shiftDistance, 6);
                         }
 
                         if (allPossibleThreats[i].danger && f.getLastUpdate() - allPossibleThreats[i].dangerTimeOut > 1000) {
