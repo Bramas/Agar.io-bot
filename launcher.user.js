@@ -633,7 +633,7 @@ console.log("Running Bot Launcher!");
         //UPDATE
         if (getPlayer().length == 0 && !reviving && ~~(getCurrentScore() / 100) > 0) {
             console.log("Dead: " + ~~(getCurrentScore() / 100));
-            apos('send', 'pageview');
+            //apos('send', 'pageview');
         }
 
         if (getPlayer().length == 0) {
