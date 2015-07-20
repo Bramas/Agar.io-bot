@@ -131,7 +131,6 @@ console.log("Running Apos Bot!");
     }
 
     function compareSize(player1, player2, ratio) {
-        console.log("compareSize "+player1.size+" "+player2.size);
         if (player1.size * player1.size * ratio < player2.size * player2.size) {
             return true;
         }
@@ -936,7 +935,12 @@ console.log("Running Apos Bot!");
                         drawPoint(line1[0], line1[1], 0, "" + i + ": 0");
                         drawPoint(line2[0], line2[1], 0, "" + i + ": 1");
                     }
-
+                    if(1)
+                    {
+                        var destination = followAngle(0, blob.x, blob.y, 190 + blob.size);
+                        destinationChoices.push(destination);
+                    }
+                    else
                     if (followMouse && goodAngles.length == 0) {
                         //This is the follow the mouse mode
                         var distance = computeDistance(player[k].x, player[k].y, tempPoint[0], tempPoint[1]);
