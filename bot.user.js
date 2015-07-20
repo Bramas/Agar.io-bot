@@ -660,9 +660,10 @@ console.log("Running Apos Bot!");
             drawLine(blob1.x, blob1.y, lineRight[0], lineRight[1], 6);
             drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob1.x, blob1.y, 6);
         } else if(getCells().hasOwnProperty(blob2.id)) {
-            drawLine(blob1.x, blob1.y, lineLeft[0], lineLeft[1], 0);
-            drawLine(blob1.x, blob1.y, lineRight[0], lineRight[1], 0);
-            drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob1.x, blob1.y, 0);
+            //drawLine(blob1.x, blob1.y, lineLeft[0], lineLeft[1], 0);
+            //drawLine(blob1.x, blob1.y, lineRight[0], lineRight[1], 0);
+            //drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob1.x, blob1.y, 0);
+            
         } else {
             drawLine(blob1.x, blob1.y, lineLeft[0], lineLeft[1], 3);
             drawLine(blob1.x, blob1.y, lineRight[0], lineRight[1], 3);
@@ -736,7 +737,7 @@ console.log("Running Apos Bot!");
                     var allPossibleViruses = allIsAll[2];
 
                     var badAngles = [];
-                    var badAnglesStrength = [];
+                    var badLines = [];
                     var obstacleList = [];
 
                     var isSafeSpot = true;
@@ -795,12 +796,31 @@ console.log("Running Apos Bot!");
                         if ((enemyCanSplit && enemyDistance < splitDangerDistance)) {
 
                             badAngles.push(getAngleRange(player[k], allPossibleThreats[i], i, splitDangerDistance));
-                            badAnglesStrength.push((splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance));
+                            var px = allPossibleThreats[i][0] - player[k][0];
+                            var py = allPossibleThreats[i][1] - player[k][1];
+                            px /= enemyDistance;
+                            py /= enemyDistance;
+                            px *= (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
+                            py *= (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
+                            badLines.push([px, py]);
+                            if(getCells().hasOwnProperty(allPossibleThreats[i]))
+                            {
+                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 0);
+                            }
                         } else if ((!enemyCanSplit && enemyDistance < normalDangerDistance)) {
 
                             badAngles.push(getAngleRange(player[k], allPossibleThreats[i], i, normalDangerDistance));
-                            badAnglesStrength.push((normalDangerDistance - enemyDistance)/(1.0*normalDangerDistance));
-
+                            var px = allPossibleThreats[i][0] - player[k][0];
+                            var py = allPossibleThreats[i][1] - player[k][1];
+                            px /= enemyDistance;
+                            py /= enemyDistance;
+                            px *= (normalDangerDistance - enemyDistance)/(1.0*normalDangerDistance);
+                            py *= (normalDangerDistance - enemyDistance)/(1.0*normalDangerDistance);
+                            badLines.push([px, py]);
+                            if(getCells().hasOwnProperty(allPossibleThreats[i]))
+                            {
+                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 0);
+                            }
                         }
                         /*else if (enemyCanSplit && enemyDistance < splitDangerDistance + shiftDistance) {
                             var tempOb = getAngleRange(player[k], allPossibleThreats[i], i, splitDangerDistance + shiftDistance);
@@ -985,10 +1005,10 @@ console.log("Running Apos Bot!");
                     } else if (badAngles.length > 0 && goodAngles == 0) {
                         //TODO: CODE TO HANDLE WHEN THERE IS NO GOOD ANGLE BUT THERE ARE ENEMIES AROUND!!!!!!!!!!!!!
                         var offset = [0, 0];
-                        for(var i = 0; i < badAngles.length; i++)
+                        for(var i = 0; i < badLines.length; i++)
                         {
-                            offset[0] += Math.cos(badAngles[i])* badAnglesStrength[i]*badAnglesStrength[i]*10;
-                            offset[1] += Math.sin(badAngles[i])* badAnglesStrength[i]*badAnglesStrength[i]*10;
+                            offset[0] += badLines[i][0];
+                            offset[1] += badLines[i][1];
                         }
                         destinationChoices.push([tempMoveX + offset[0], tempMoveY + offset[1]]);
                     } else if (clusterAllFood.length > 0) {
