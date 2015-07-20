@@ -796,12 +796,12 @@ console.log("Running Apos Bot!");
                         if ((enemyCanSplit && enemyDistance < splitDangerDistance)) {
 
                             badAngles.push(getAngleRange(player[k], allPossibleThreats[i], i, splitDangerDistance));
-                            var px = allPossibleThreats[i].x - player[k].x;
-                            var py = allPossibleThreats[i].y - player[k].y;
+                            var px = player[k].x - allPossibleThreats[i].x;
+                            var py = player[k].y - allPossibleThreats[i].y;
                             px /= enemyDistance;
                             py /= enemyDistance;
                             var factor = (splitDangerDistance - enemyDistance)/(1.0*splitDangerDistance);
-                            factor *= factor*100;
+                            factor *= factor*200;
                             px *= factor;
                             py *= factor;
                             badLines.push([px, py]);
@@ -813,12 +813,12 @@ console.log("Running Apos Bot!");
                         } else if ((!enemyCanSplit && enemyDistance < normalDangerDistance)) {
 
                             badAngles.push(getAngleRange(player[k], allPossibleThreats[i], i, normalDangerDistance));
-                            var px = allPossibleThreats[i][0] - player[k][0];
-                            var py = allPossibleThreats[i][1] - player[k][1];
+                            var px = player[k].x - allPossibleThreats[i].x;
+                            var py = player[k].y - allPossibleThreats[i].y;
                             px /= enemyDistance;
                             py /= enemyDistance;
                             var factor = (normalDangerDistance - enemyDistance)/(1.0*normalDangerDistance);
-                            factor *= factor*100;
+                            factor *= factor*200;
                             px *= factor;
                             py *= factor;
                             badLines.push([px, py]);
@@ -987,7 +987,8 @@ console.log("Running Apos Bot!");
                         //tempMoveX = destination[0];
                         //tempMoveY = destination[1];
 
-                    } else if (goodAngles.length > 0) {
+                    } else 
+                    /*if (goodAngles.length > 0) {
                         var bIndex = goodAngles[0];
                         var biggest = goodAngles[0][1];
                         for (var i = 1; i < goodAngles.length; i++) {
@@ -1007,7 +1008,9 @@ console.log("Running Apos Bot!");
                         drawLine(player[k].x, player[k].y, line1[0], line1[1], 7);
                         //tempMoveX = line1[0];
                         //tempMoveY = line1[1];
-                    } else if (badAngles.length > 0 && goodAngles == 0) {
+                    } else */
+                    //if (badAngles.length > 0 && goodAngles == 0) {
+                    if (badLines.length > 0) {
                         //TODO: CODE TO HANDLE WHEN THERE IS NO GOOD ANGLE BUT THERE ARE ENEMIES AROUND!!!!!!!!!!!!!
                         var offset = [0, 0];
                         for(var i = 0; i < badLines.length; i++)
