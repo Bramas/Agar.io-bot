@@ -942,7 +942,7 @@ console.log("Running Apos Bot!");
                         var diff = (angle2 - angle1).mod(360);
                         obstacleAngles.push([angle1, diff]);
                     }
-/*
+
                     for (var i = 0; i < goodAngles.length; i++) {
                         var line1 = followAngle(goodAngles[i][0], player[k].x, player[k].y, 100 + player[k].size);
                         var line2 = followAngle((goodAngles[i][0] + goodAngles[i][1]).mod(360), player[k].x, player[k].y, 100 + player[k].size);
@@ -955,7 +955,7 @@ console.log("Running Apos Bot!");
 
                         drawPoint(line1[0], line1[1], 0, "" + i + ": 0");
                         drawPoint(line2[0], line2[1], 0, "" + i + ": 1");
-                    }*/
+                    }
 
                     for (var i = 0; i < obstacleAngles.length; i++) {
                         var line1 = followAngle(obstacleAngles[i][0], player[k].x, player[k].y, 50 + player[k].size);
@@ -990,7 +990,7 @@ console.log("Running Apos Bot!");
                         //tempMoveY = destination[1];
 
                     } else 
-                    /*if (goodAngles.length > 0) {
+                    if (goodAngles.length > 0) {
                         var bIndex = goodAngles[0];
                         var biggest = goodAngles[0][1];
                         for (var i = 1; i < goodAngles.length; i++) {
@@ -1010,7 +1010,7 @@ console.log("Running Apos Bot!");
                         drawLine(player[k].x, player[k].y, line1[0], line1[1], 7);
                         //tempMoveX = line1[0];
                         //tempMoveY = line1[1];
-                    } else */
+                    } else 
                     //if (badAngles.length > 0 && goodAngles == 0) {
                     if (badLines.length > 0) {
                         //TODO: CODE TO HANDLE WHEN THERE IS NO GOOD ANGLE BUT THERE ARE ENEMIES AROUND!!!!!!!!!!!!!
