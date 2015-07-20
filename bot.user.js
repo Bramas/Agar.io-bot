@@ -665,9 +665,9 @@ console.log("Running Apos Bot!");
             //drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob1.x, blob1.y, 0);
             
         } else {
-            drawLine(blob1.x, blob1.y, lineLeft[0], lineLeft[1], 3);
-            drawLine(blob1.x, blob1.y, lineRight[0], lineRight[1], 3);
-            drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob1.x, blob1.y, 3);
+            //drawLine(blob1.x, blob1.y, lineLeft[0], lineLeft[1], 3);
+            //drawLine(blob1.x, blob1.y, lineRight[0], lineRight[1], 3);
+            //drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob1.x, blob1.y, 3);
         }
 
         return [leftAngle, difference];
