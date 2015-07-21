@@ -730,7 +730,7 @@ console.log("Running Apos Bot!");
                     var allPossibleThreats = allIsAll[1];
                     var allPossibleViruses = allIsAll[2];
                     
-                    
+                    var ignoreFood = false;
                     var angles = [];
                     for (var i = 0; i < allPossibleThreats.length; i++) {
                         
@@ -747,9 +747,18 @@ console.log("Running Apos Bot!");
                         var shiftDistance = player[k].size;
                         var splitDangerDistance = splitDistance + 10;
                         var normalDangerDistance = 25;
+                        
+                        
+                        if (enemyCanSplit) {
+                            drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, splitDangerDistance + allPossibleThreats[i].size, 0);
+                            //drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, splitDangerDistance + shiftDistance, 6);
+                        } else {
+                            drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, normalDangerDistance + allPossibleThreats[i].size, 3);
+                            //drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, normalDangerDistance + shiftDistance, 6);
+                        }
     
                         if ((enemyCanSplit && relativeDistance < splitDangerDistance)) {
-    
+                            ignoreFood = true;
                             var px = player[k].x - allPossibleThreats[i].x;
                             var py = player[k].y - allPossibleThreats[i].y;
                             px /= enemyDistance;
@@ -762,7 +771,7 @@ console.log("Running Apos Bot!");
                             angles.push([px, py]);
                             drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 3);
                         } else if ((!enemyCanSplit && relativeDistance < normalDangerDistance)) {
-    
+                            ignoreFood = true;
                             var px = player[k].x - allPossibleThreats[i].x;
                             var py = player[k].y - allPossibleThreats[i].y;
                             px /= enemyDistance;
@@ -774,6 +783,34 @@ console.log("Running Apos Bot!");
                             py *= factor;
                             angles.push([px, py]);
                             drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 3);
+                        }
+                        else
+                        {
+                            if (enemyCanSplit) {
+                                var px = player[k].x - allPossibleThreats[i].x;
+                                var py = player[k].y - allPossibleThreats[i].y;
+                                px /= enemyDistance;
+                                py /= enemyDistance;
+                                var factor = (2*splitDangerDistance - relativeDistance)/(2.0*splitDangerDistance);
+                                factor *= factor;
+                                factor *= 100;
+                                px *= factor;
+                                py *= factor;
+                                angles.push([px, py]);
+                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 3);
+                            } else{
+                                var px = player[k].x - allPossibleThreats[i].x;
+                                var py = player[k].y - allPossibleThreats[i].y;
+                                px /= enemyDistance;
+                                py /= enemyDistance;
+                                var factor = (2*normalDangerDistance - relativeDistance)/(2.0*normalDangerDistance);
+                                factor *= factor;
+                                factor *= 100;
+                                px *= factor;
+                                py *= factor;
+                                angles.push([px, py]);
+                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 3);
+                            }
                         }
                     }
                     
@@ -820,7 +857,7 @@ console.log("Running Apos Bot!");
                             }
                         }
                     }
-                    if(angles.length == 0)
+                    if(!ignoreFood)
                     {
                         for (var i = 0; i < allPossibleFood.length; i++) {
                             var foodDistance = computeDistance(allPossibleFood[i][0], allPossibleFood[i][1], player[k].x, player[k].y) - player[k].size;
