@@ -846,7 +846,8 @@ console.log("Running Apos Bot!");
                     
                     //destinationChoices.push([tempMoveX + 100.0 * offset[0]/offdist, tempMoveY + 100.0 * offset[1]/offdist]);
                     drawLine(player[k].x, player[k].y, player[k].x + 100.0 * offset[0]/offdist, player[k].y + 100.0 * offset[1]/offdist, 2);
-                    destinationChoices.push([0,1]);
+                    var line1 = followAngle(180, player[k].x, player[k].y, 100);
+                    destinationChoices.push(line1);
                 }
             }
             
