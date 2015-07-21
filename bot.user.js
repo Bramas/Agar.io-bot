@@ -7,7 +7,7 @@
 // @author      http://www.twitch.tv/apostolique
 // ==/UserScript==
 
-var aposBotVersion = 3.552;
+var aposBotVersion = 3.553;
 
 //TODO: Team mode
 //      Detect when people are merging
