@@ -748,7 +748,7 @@ console.log("Running Apos Bot!");
                         }
                         var shiftDistance = player[k].size;
                         var splitDangerDistance = splitDistance + 10;
-                        var normalDangerDistance = 25;
+                        var normalDangerDistance = 35;
                         
                         
                         if (enemyCanSplit) {
