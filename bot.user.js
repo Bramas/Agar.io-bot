@@ -732,6 +732,21 @@ console.log("Running Apos Bot!");
                     
                     var ignoreFood = false;
                     var angles = [];
+                    
+                    {
+                        var centerDistance = computeDistance(6500, 6500, player[k].x, player[k].y);
+                        var px = 6500 - player[k].x;
+                        var py = 6500 - player[k].y;
+                        px /= 10;
+                        py /= 10;
+                        /*px /= centerDistance;
+                        py /= centerDistance;
+                        px *= factor;
+                        py *= factor;*/
+                        angles.push([px, py]);
+                        drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 1);
+                    }
+                    
                     for (var i = 0; i < allPossibleThreats.length; i++) {
                         
                         // Big enemis will not split for us!!
