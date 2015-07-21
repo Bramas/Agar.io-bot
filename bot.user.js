@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name        AposBot
-// @namespace   AposBot
+// @name        WyBot
+// @namespace   WyBot
 // @include     http://agar.io/*
-// @version     3.554
+// @version     3.555
 // @grant       none
-// @author      http://www.twitch.tv/apostolique
+// @author      http://www.twitch.tv/apostolique + Bramas
 // ==/UserScript==
 
-var aposBotVersion = 3.554;
+var aposBotVersion = 3.555;
 
 //TODO: Team mode
 //      Detect when people are merging
@@ -871,7 +871,7 @@ console.log("Running Apos Bot!");
                             px /= centerDistance;
                             py /= centerDistance;
                             var factor = (centerDistance) - (5500.0);
-                            console.log([centerDistance, factor, factor*factor, factor*factor/100.0]);
+                            //console.log([centerDistance, factor, factor*factor, factor*factor/100.0]);
                             factor *= factor;
                             factor /= 100.0;
                             px *= factor;
