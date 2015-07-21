@@ -721,7 +721,136 @@ console.log("Running Apos Bot!");
 
             if (player.length > 0) {
 
+                for (var k = 0; k < player.length; k++) { 
+                    drawCircle(player[k].x, player[k].y, player[k].size + splitDistance, 5);
+                    
+                    var allIsAll = getAll(player[k]);
+
+                    var allPossibleFood = allIsAll[0];
+                    var allPossibleThreats = allIsAll[1];
+                    var allPossibleViruses = allIsAll[2];
+                    
+                    
+                    var angles = [];
+                    for (var i = 0; i < allPossibleThreats.length; i++) {
+                        
+                        // Big enemis will not split for us!!
+                        var enemyCanSplit = canSplit(player[k], allPossibleThreats[i]) && isFood(allPossibleThreats[i], player[k]);
+                        
+    
+                        var enemyDistance = computeDistance(allPossibleThreats[i].x, allPossibleThreats[i].y, player[k].x, player[k].y);
+                        var relativeDistance = enemyDistance - player[k].size - allPossibleThreats[i].size;
+                        if(relativeDistance < 0)
+                        {
+                            relativeDistance = 0;
+                        }
+                        var shiftDistance = player[k].size;
+                        var splitDangerDistance = splitDistance + 10;
+                        var normalDangerDistance = 25;
+    
+                        if ((enemyCanSplit && relativeDistance < splitDangerDistance)) {
+    
+                            var px = player[k].x - allPossibleThreats[i].x;
+                            var py = player[k].y - allPossibleThreats[i].y;
+                            px /= enemyDistance;
+                            py /= enemyDistance;
+                            var factor = (splitDangerDistance - relativeDistance)/(1.0*splitDangerDistance);
+                            factor *= factor;
+                            factor *= 500;
+                            px *= factor;
+                            py *= factor;
+                            angles.push([px, py]);
+                            drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 3);
+                        } else if ((!enemyCanSplit && relativeDistance < normalDangerDistance)) {
+    
+                            var px = player[k].x - allPossibleThreats[i].x;
+                            var py = player[k].y - allPossibleThreats[i].y;
+                            px /= enemyDistance;
+                            py /= enemyDistance;
+                            var factor = (normalDangerDistance - relativeDistance)/(1.0*normalDangerDistance);
+                            factor *= factor;
+                            factor *= 500;
+                            px *= factor;
+                            py *= factor;
+                            angles.push([px, py]);
+                            drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 3);
+                        }
+                    }
+                    
+                    for (var i = 0; i < allPossibleViruses.length; i++) {
+                        var virusDistance = computeDistance(allPossibleViruses[i].x, allPossibleViruses[i].y, player[k].x, player[k].y);
+                        if (player[k].size < allPossibleViruses[i].size) {
+                            if (virusDistance < (allPossibleViruses[i].size * 2)) {
+                                
+                                var px = player[k].x - allPossibleViruses[i].x;
+                                var py = player[k].y - allPossibleViruses[i].y;
+                                px /= virusDistance;
+                                py /= virusDistance;
+                                var relativeDistance = virusDistance - allPossibleViruses[i].size;
+                                if(relativeDistance < 0)
+                                {
+                                    relativeDistance = 0;
+                                }
+                                var factor = (allPossibleViruses[i].size * 2 - relativeDistance)/(allPossibleViruses[i].size * 2.0);
+                                factor *= factor;
+                                factor *= 500;
+                                px *= factor;
+                                py *= factor;
+                                angles.push([px, py]);
+                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 6);
+                            }
+                        } else {
+                            if (virusDistance < (player[k].size * 2)) {
+                                var px = player[k].x - allPossibleViruses[i].x;
+                                var py = player[k].y - allPossibleViruses[i].y;
+                                px /= virusDistance;
+                                py /= virusDistance;
+                                var relativeDistance = virusDistance - allPossibleViruses[i].size;
+                                if(relativeDistance < 0)
+                                {
+                                    relativeDistance = 0;
+                                }
+                                var factor = (allPossibleViruses[i].size * 2 - relativeDistance)/(allPossibleViruses[i].size * 2.0);
+                                factor *= factor;
+                                factor *= 500;
+                                px *= factor;
+                                py *= factor;
+                                angles.push([px, py]);
+                                drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 6);
+                            }
+                        }
+                    }
+                    
+                    for (var i = 0; i < allPossibleFood.length; i++) {
+                        var foodDistance = computeDistance(allPossibleFood[i][0], allPossibleFood[i][1], player[k].x, player[k].y) - player[k].size;
+                        if(foodDistance < 0) { continue; }
+                        var px = player[k].x - allPossibleFood[i][0];
+                        var py = player[k].y - allPossibleFood[i][1];
+                        px /= foodDistance;
+                        py /= foodDistance;
+                        px *= 100;
+                        py *= 100;
+                        drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 5);
+                        angles.push([px, py]);
+                    }
+                    
+                    var offset = [0, 0];
+                    for(var i = 0; i < angles.length; i++)
+                    {
+                        offset[0] += angles[i][0];
+                        offset[1] += angles[i][1];
+                    }
+                    destinationChoices.push([tempMoveX + offset[0]*10, tempMoveY + offset[1]*10]);
+                    
+                }
+            }
+            
+            
+            // ---------------------------------------- APO
+            if(0)
+            {
                 for (var k = 0; k < player.length; k++) {
+            
 
                     //console.log("Working on blob: " + k);
 
@@ -750,11 +879,8 @@ console.log("Running Apos Bot!");
                     for (var i = 0; i < allPossibleThreats.length; i++) {
 
                         var enemyDistance = computeDistance(allPossibleThreats[i].x, allPossibleThreats[i].y, player[k].x, player[k].y);
-
                         var shiftDistance = player[k].size;
-                        
                         var splitDangerDistance = allPossibleThreats[i].size + splitDistance + 10 + shiftDistance;
-
                         var normalDangerDistance = allPossibleThreats[i].size + 25 + shiftDistance;
 
 
