@@ -829,6 +829,8 @@ console.log("Running Apos Bot!");
                             var py = - player[k].y + allPossibleFood[i][1];
                             px /= foodDistance;
                             py /= foodDistance;
+                            px /= foodDistance;
+                            py /= foodDistance;
                             px *= 100;
                             py *= 100;
                             drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 5);
