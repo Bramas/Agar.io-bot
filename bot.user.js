@@ -861,11 +861,11 @@ console.log("Running Apos Bot!");
                     }
                     if(!ignoreFood)
                     {
-                        var centerDistance = computeDistance(6500, 6500, player[k].x, player[k].y);
+                        var centerDistance = computeDistance(6500 - getOffsetX(), 6500 - getOffsetY(), player[k].x, player[k].y);
                         if(centerDistance > 5500)
                         {
-                            var px = 6500 - player[k].x;
-                            var py = 6500 - player[k].y;
+                            var px = 6500 - getOffsetX() - player[k].x;
+                            var py = 6500 - getOffsetY() - player[k].y;
                             var factor = (5500 - centerDistance)/(5500.0);
                             factor *= factor;
                             factor *= 200;
