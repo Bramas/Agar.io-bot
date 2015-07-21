@@ -7,7 +7,7 @@
 // @author      http://www.twitch.tv/apostolique
 // ==/UserScript==
 
-var aposBotVersion = 3.551;
+var aposBotVersion = 3.552;
 
 //TODO: Team mode
 //      Detect when people are merging
@@ -1003,7 +1003,6 @@ console.log("Running Apos Bot!");
                             {
                                 drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 3);
                             }
-                            console.log(" "+px+" "+py);
                         } else if ((!enemyCanSplit && enemyDistance < normalDangerDistance)) {
 
                             badAngles.push(getAngleRange(player[k], allPossibleThreats[i], i, normalDangerDistance));
