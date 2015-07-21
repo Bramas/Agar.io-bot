@@ -820,18 +820,20 @@ console.log("Running Apos Bot!");
                             }
                         }
                     }
-                    
-                    for (var i = 0; i < allPossibleFood.length; i++) {
-                        var foodDistance = computeDistance(allPossibleFood[i][0], allPossibleFood[i][1], player[k].x, player[k].y) - player[k].size;
-                        if(foodDistance < 0) { continue; }
-                        var px = - player[k].x + allPossibleFood[i][0];
-                        var py = - player[k].y + allPossibleFood[i][1];
-                        px /= foodDistance;
-                        py /= foodDistance;
-                        px *= 100;
-                        py *= 100;
-                        drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 5);
-                        angles.push([px, py]);
+                    if(angles.length == 0)
+                    {
+                        for (var i = 0; i < allPossibleFood.length; i++) {
+                            var foodDistance = computeDistance(allPossibleFood[i][0], allPossibleFood[i][1], player[k].x, player[k].y) - player[k].size;
+                            if(foodDistance < 0) { continue; }
+                            var px = - player[k].x + allPossibleFood[i][0];
+                            var py = - player[k].y + allPossibleFood[i][1];
+                            px /= foodDistance;
+                            py /= foodDistance;
+                            px *= 100;
+                            py *= 100;
+                            drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 5);
+                            angles.push([px, py]);
+                        }
                     }
                     
                     var offset = [0, 0];
