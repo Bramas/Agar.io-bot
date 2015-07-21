@@ -2,12 +2,12 @@
 // @name        AposBot
 // @namespace   AposBot
 // @include     http://agar.io/*
-// @version     3.551
+// @version     3.554
 // @grant       none
 // @author      http://www.twitch.tv/apostolique
 // ==/UserScript==
 
-var aposBotVersion = 3.553;
+var aposBotVersion = 3.554;
 
 //TODO: Team mode
 //      Detect when people are merging
@@ -871,7 +871,7 @@ console.log("Running Apos Bot!");
                             px /= centerDistance;
                             py /= centerDistance;
                             var factor = (centerDistance) - (5500.0);
-                            console.log([centerDistance, factor, factor*factor, factor*factor/100.0);
+                            console.log([centerDistance, factor, factor*factor, factor*factor/100.0]);
                             factor *= factor;
                             factor /= 100.0;
                             px *= factor;
