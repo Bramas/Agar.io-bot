@@ -863,11 +863,11 @@ console.log("Running Apos Bot!");
                     {
                         
                         console.log([player[k].x, player[k].y]);
-                        var centerDistance = computeDistance(6500 - getOffsetX(), 6500 - getOffsetY(), player[k].x, player[k].y);
+                        var centerDistance = computeDistance(0, 0, player[k].x, player[k].y);
                         if(centerDistance > 5500)
                         {
-                            var px = 6500 - getOffsetX() - player[k].x;
-                            var py = 6500 - getOffsetY() - player[k].y;
+                            var px =  - player[k].x;
+                            var py =  - player[k].y;
                             var factor = (5500 - centerDistance)/(5500.0);
                             factor *= factor;
                             factor *= 200;
