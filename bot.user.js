@@ -2,12 +2,12 @@
 // @name        WyBot
 // @namespace   WyBot
 // @include     http://agar.io/*
-// @version     3.555
+// @version     3.556
 // @grant       none
 // @author      http://www.twitch.tv/apostolique + Bramas
 // ==/UserScript==
 
-var aposBotVersion = 3.555;
+var aposBotVersion = 3.556;
 
 //TODO: Team mode
 //      Detect when people are merging
@@ -748,7 +748,7 @@ console.log("Running Apos Bot!");
                         }
                         var shiftDistance = player[k].size;
                         var splitDangerDistance = splitDistance + 10;
-                        var normalDangerDistance = 35;
+                        var normalDangerDistance = 45;
                         
                         
                         if (enemyCanSplit) {
@@ -872,7 +872,7 @@ console.log("Running Apos Bot!");
                             py /= centerDistance;
                             var factor = (centerDistance) - (5500.0);
                             //console.log([centerDistance, factor, factor*factor, factor*factor/100.0]);
-                            factor *= factor;
+                            //factor *= factor;
                             factor /= 100.0;
                             px *= factor;
                             py *= factor;
