@@ -2,12 +2,12 @@
 // @name        WyBot
 // @namespace   WyBot
 // @include     http://agar.io/*
-// @version     3.558
+// @version     3.559
 // @grant       none
 // @author      http://www.twitch.tv/apostolique + Bramas
 // ==/UserScript==
 
-var aposBotVersion = 3.558;
+var aposBotVersion = 3.559;
 
 //TODO: Team mode
 //      Detect when people are merging
@@ -734,11 +734,14 @@ console.log("Running Apos Bot!");
                     var angles = [];
                     
                     
+                    var clusterAllFood = clusterFood(allPossibleFood, player[k].size);    
+                    
                     for (var i = 0; i < allPossibleThreats.length; i++) {
                         
                         // Big enemis will not split for us!!
                         var enemyCanSplit = canSplit(player[k], allPossibleThreats[i]) && isFood(allPossibleThreats[i], player[k]);
                         
+                             
     
                         var enemyDistance = computeDistance(allPossibleThreats[i].x, allPossibleThreats[i].y, player[k].x, player[k].y);
                         var relativeDistance = enemyDistance - player[k].size - allPossibleThreats[i].size;
@@ -749,7 +752,13 @@ console.log("Running Apos Bot!");
                         var shiftDistance = player[k].size;
                         var splitDangerDistance = splitDistance + 10;
                         var normalDangerDistance = 45;
-                        
+                                
+                        for (var j = clusterAllFood.length - 1; j >= 0 ; j--) {
+                            var secureDistance = (enemyCanSplit ? splitDangerDistance : normalDangerDistance);
+                            if (computeDistance(allPossibleThreats[i].x, allPossibleThreats[i].y, clusterAllFood[j][0], clusterAllFood[j][1]) < allPossibleThreats[i].size + secureDistance)
+                                clusterAllFood.splice(j, 1);
+                        }
+
                         
                         if (enemyCanSplit) {
                             drawCircle(allPossibleThreats[i].x, allPossibleThreats[i].y, splitDangerDistance + allPossibleThreats[i].size, 0);
@@ -885,12 +894,6 @@ console.log("Running Apos Bot!");
                             angles.push([px, py]);
                             drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 1);
                         }
-                        var clusterAllFood = clusterFood(allPossibleFood, player[k].size);                 
-                        for (var j = clusterAllFood.length - 1; j >= 0 ; j--) {
-                            var secureDistance = (enemyCanSplit ? splitDangerDistance : normalDangerDistance);
-                            if (computeDistance(allPossibleThreats[i].x, allPossibleThreats[i].y, clusterAllFood[j][0], clusterAllFood[j][1]) < secureDistance)
-                                clusterAllFood.splice(j, 1);
-                        }
                         if(clusterAllFood.length > 0)
                         {
                             for (var i = 0; i < clusterAllFood.length; i++) {
@@ -926,8 +929,8 @@ console.log("Running Apos Bot!");
                             
                             var px = clusterAllFood[bestFoodI][0] - player[k].x;
                             var py = clusterAllFood[bestFoodI][1] - player[k].y;
-                            px *= bestFood / 10.0;
-                            py *= bestFood / 10.0;
+                            //px *= bestFood / 10.0;
+                            //py *= bestFood / 10.0;
                             
                             drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 6);
                             angles.push([px, py]);
