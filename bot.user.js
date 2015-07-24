@@ -2,12 +2,12 @@
 // @name        WyBot
 // @namespace   WyBot
 // @include     http://agar.io/*
-// @version     3.556
+// @version     3.557
 // @grant       none
 // @author      http://www.twitch.tv/apostolique + Bramas
 // ==/UserScript==
 
-var aposBotVersion = 3.556;
+var aposBotVersion = 3.557;
 
 //TODO: Team mode
 //      Detect when people are merging
@@ -862,6 +862,8 @@ console.log("Running Apos Bot!");
                     if(!ignoreFood)
                     {
                         
+                        
+                        
                         var centerDistance = computeDistance(0, 0, player[k].x, player[k].y);
                         if(centerDistance > 5500)
                         {
@@ -883,6 +885,57 @@ console.log("Running Apos Bot!");
                             angles.push([px, py]);
                             drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 1);
                         }
+                        var clusterAllFood = clusterFood(allPossibleFood, player[k].size);                 
+                        for (var j = clusterAllFood.length - 1; j >= 0 ; j--) {
+                            var secureDistance = (enemyCanSplit ? splitDangerDistance : normalDangerDistance);
+                            if (computeDistance(allPossibleThreats[i].x, allPossibleThreats[i].y, clusterAllFood[j][0], clusterAllFood[j][1]) < secureDistance)
+                                clusterAllFood.splice(j, 1);
+                        }
+                        if(clusterAllFood.lengt > 0)
+                        {
+                            for (var i = 0; i < clusterAllFood.length; i++) {
+                            //console.log("mefore: " + clusterAllFood[i][2]);
+                            //This is the cost function. Higher is better.
+
+                                var clusterAngle = getAngle(clusterAllFood[i][0], clusterAllFood[i][1], player[k].x, player[k].y);
+
+                                clusterAllFood[i][2] = clusterAllFood[i][2] * 6 - computeDistance(clusterAllFood[i][0], clusterAllFood[i][1], player[k].x, player[k].y);
+                                //console.log("Current Value: " + clusterAllFood[i][2]);
+
+                                //(goodAngles[bIndex][1] / 2 - (Math.abs(perfectAngle - clusterAngle)));
+
+                                clusterAllFood[i][3] = clusterAngle;
+
+                                drawPoint(clusterAllFood[i][0], clusterAllFood[i][1], 1, "");
+                                //console.log("After: " + clusterAllFood[i][2]);
+                            }
+    
+                            var bestFoodI = 0;
+                            var bestFood = clusterAllFood[0][2];
+                            for (var i = 1; i < clusterAllFood.length; i++) {
+                                if (bestFood < clusterAllFood[i][2]) {
+                                    bestFood = clusterAllFood[i][2];
+                                    bestFoodI = i;
+                                }
+                            }
+    
+                            //console.log("Best Value: " + clusterAllFood[bestFoodI][2]);
+    
+                            var distance = computeDistance(player[k].x, player[k].y, clusterAllFood[bestFoodI][0], clusterAllFood[bestFoodI][1]);
+    
+                            
+                            var px = clusterAllFood[bestFoodI][0] - player[k].x;
+                            var py = clusterAllFood[bestFoodI][1] - player[k].y;
+                            px *= bestFood / 10.0;
+                            py *= bestFood / 10.0;
+                            
+                            drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 6);
+                            angles.push([px, py]);
+                            //var shiftedAngle = shiftAngle(obstacleAngles, getAngle(clusterAllFood[bestFoodI][0], clusterAllFood[bestFoodI][1], player[k].x, player[k].y), [0, 360]);
+    
+                            //var destination = followAngle(shiftedAngle, player[k].x, player[k].y, distance);
+                        }
+                        /*
                         for (var i = 0; i < allPossibleFood.length; i++) {
                             var foodDistance = computeDistance(allPossibleFood[i][0], allPossibleFood[i][1], player[k].x, player[k].y) - player[k].size;
                             if(foodDistance < 0) { continue; }
@@ -896,7 +949,7 @@ console.log("Running Apos Bot!");
                             py *= 100;
                             drawLine(player[k].x, player[k].y, player[k].x + px, player[k].y + py, 5);
                             angles.push([px, py]);
-                        }
+                        }*/
                     }
                     
                     var offset = [0, 0];
