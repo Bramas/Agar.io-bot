@@ -2,12 +2,12 @@
 // @name        WyBot
 // @namespace   WyBot
 // @include     http://agar.io/*
-// @version     3.559
+// @version     3.557
 // @grant       none
 // @author      http://www.twitch.tv/apostolique + Bramas
 // ==/UserScript==
 
-var aposBotVersion = 3.559;
+var aposBotVersion = 3.557;
 
 //TODO: Team mode
 //      Detect when people are merging
@@ -870,9 +870,7 @@ console.log("Running Apos Bot!");
                     }
                     if(!ignoreFood)
                     {
-                        
-                        
-                        
+                       
                         var centerDistance = computeDistance(0, 0, player[k].x, player[k].y);
                         if(centerDistance > 5500)
                         {
@@ -955,12 +953,92 @@ console.log("Running Apos Bot!");
                         }*/
                     }
                     
+                        
+                    
                     var offset = [0, 0];
                     for(var i = 0; i < angles.length; i++)
                     {
                         offset[0] += angles[i][0];
                         offset[1] += angles[i][1];
                     }
+                    if(ignoreFood)
+                    {
+                        if (player[k].x < f.getMapStartX() + 1000) {
+                            //LEFT
+                            //console.log("Left");
+                            offset[0] = 0;
+                            if(offset[1] == 0)
+                            {
+                                offset[1] = 1;
+                            }
+                            /*listToUse.push([[135, true], [225, false]]);
+
+                            var lineLeft = followAngle(135, blob.x, blob.y, 190 + blob.size);
+                            var lineRight = followAngle(225, blob.x, blob.y, 190 + blob.size);
+                            drawLine(blob.x, blob.y, lineLeft[0], lineLeft[1], 5);
+                            drawLine(blob.x, blob.y, lineRight[0], lineRight[1], 5);
+                            drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob.x, blob.y, 5);*/
+                        }else
+                        if (player[k].y < f.getMapStartY() + 1000) {
+                            //TOP
+                            //console.log("TOP");
+
+                            offset[1] = 0;
+                            if(offset[0] == 0)
+                            {
+                                offset[0] = 1;
+                            } 
+                            /*
+                            listToUse.push([[225, true], [315, false]]);
+
+                            var lineLeft = followAngle(225, blob.x, blob.y, 190 + blob.size);
+                            var lineRight = followAngle(315, blob.x, blob.y, 190 + blob.size);
+                            drawLine(blob.x, blob.y, lineLeft[0], lineLeft[1], 5);
+                            drawLine(blob.x, blob.y, lineRight[0], lineRight[1], 5);
+                            drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob.x, blob.y, 5);
+                            */
+                        }else
+                        if (player[k].x > f.getMapEndX() - 1000) {
+                            //RIGHT
+                            //console.log("RIGHT");
+
+                            offset[0] = 0;
+                            if(offset[1] == 0)
+                            {
+                                offset[1] = 1;
+                            }
+                            /*
+                            listToUse.push([[315, true], [45, false]]);
+
+                            var lineLeft = followAngle(315, blob.x, blob.y, 190 + blob.size);
+                            var lineRight = followAngle(45, blob.x, blob.y, 190 + blob.size);
+                            drawLine(blob.x, blob.y, lineLeft[0], lineLeft[1], 5);
+                            drawLine(blob.x, blob.y, lineRight[0], lineRight[1], 5);
+                            drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob.x, blob.y, 5);
+                            */
+                        }else
+                        if (player[k].y > f.getMapEndY() - 1000) {
+                            //BOTTOM
+                            //console.log("BOTTOM");
+
+                            offset[1] = 0;
+                            if(offset[0] == 0)
+                            {
+                                offset[0] = 1;
+                            } 
+                            /*
+                            listToUse.push([[45, true], [135, false]]);
+
+                            var lineLeft = followAngle(45, blob.x, blob.y, 190 + blob.size);
+                            var lineRight = followAngle(135, blob.x, blob.y, 190 + blob.size);
+                            drawLine(blob.x, blob.y, lineLeft[0], lineLeft[1], 5);
+                            drawLine(blob.x, blob.y, lineRight[0], lineRight[1], 5);
+                            drawArc(lineLeft[0], lineLeft[1], lineRight[0], lineRight[1], blob.x, blob.y, 5);
+                            */
+                        }   
+                    }
+                    
+                    
                     var offdist = computeDistance(0,0,offset[0],offset[1]);
                     destinationChoices.push([player[k].x + 100.0 * offset[0]/offdist, player[k].y + 100.0 * offset[1]/offdist]);
                     drawLine(player[k].x, player[k].y, player[k].x + 100.0 * offset[0]/offdist, player[k].y + 100.0 * offset[1]/offdist, 2);
