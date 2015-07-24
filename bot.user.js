@@ -2,12 +2,12 @@
 // @name        WyBot
 // @namespace   WyBot
 // @include     http://agar.io/*
-// @version     3.557
+// @version     3.558
 // @grant       none
 // @author      http://www.twitch.tv/apostolique + Bramas
 // ==/UserScript==
 
-var aposBotVersion = 3.557;
+var aposBotVersion = 3.558;
 
 //TODO: Team mode
 //      Detect when people are merging
@@ -891,7 +891,7 @@ console.log("Running Apos Bot!");
                             if (computeDistance(allPossibleThreats[i].x, allPossibleThreats[i].y, clusterAllFood[j][0], clusterAllFood[j][1]) < secureDistance)
                                 clusterAllFood.splice(j, 1);
                         }
-                        if(clusterAllFood.lengt > 0)
+                        if(clusterAllFood.length > 0)
                         {
                             for (var i = 0; i < clusterAllFood.length; i++) {
                             //console.log("mefore: " + clusterAllFood[i][2]);
